@@ -20,25 +20,23 @@
                 pusher ps;
                 head_commit hc;
                 String repo;
-                String url;
-                String timestamp;
                 while(parser.nextToken() != null){
-                   if(parser.getText() == 'commits_url') {
+                    if(parser.getText() == 'pusher') {
                         parser.nextToken(); // Move to the next token
-                        url =  parser.getText();
+                        ps = (pusher)parser.readValueAs(pusher.class);
+                    } else if(parser.getText() == 'head_commit') {
+                        parser.nextToken(); // Move to the next token
+                        hc = (head_commit)parser.readValueAs(head_commit.class);
                     } else if(parser.getText() == 'full_name') {
                         parser.nextToken(); // Move to the next token
                         repo = parser.getText();
-                    } else if(parser.getText() == 'pushed_at'){
-                        parser.nextToken(); // Move to the next token
-                        timestamp = parser.getText();
                     }
                 }
                 Github_Details__c githubDetails = new Github_Details__c();
                 githubDetails.Committer_Name__c = ps!=null? ps.name:'';
                 githubDetails.Committer_Email__c = ps!=null? ps.email:'';
-                githubDetails.Commit_Timestamp__c = timestamp;
-                githubDetails.Committer_URL__c = url;
+                githubDetails.Commit_Timestamp__c = hc!=null? hc.timestamp:'';
+                githubDetails.Committer_URL__c = hc!=null? hc.url:'';
                 githubDetails.Repository_Name__c = repo;
                 githubDetails.Added_Components__c = hc!=null && hc.added!=null? String.join(hc.added, ','):'';
                 githubDetails.Modified_Components__c = hc!=null && hc.modified!=null? String.join(hc.modified, ','):'';
