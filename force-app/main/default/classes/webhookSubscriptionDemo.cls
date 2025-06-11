@@ -64,7 +64,7 @@
         public pusher(String name, String email) {
             this.name = name;
             this.email = email;
-        }
+          }
     }
 
     public class head_commit {
