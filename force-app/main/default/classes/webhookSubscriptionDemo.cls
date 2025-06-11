@@ -55,7 +55,7 @@
             RestResponse res = RestContext.response;
             res.statusCode = 500;
             res.responseBody = Blob.valueOf('Error processing webhook notification: ' + e.getMessage());
-        }
+         }
     }
 
     public class pusher {
