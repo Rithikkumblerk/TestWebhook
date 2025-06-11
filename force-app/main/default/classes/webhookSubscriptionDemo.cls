@@ -30,7 +30,7 @@
                     } else if(parser.getText() == 'full_name') {
                         parser.nextToken(); // Move to the next token
                         repo = parser.getText();
-                    }
+                     }
                 }
                 Github_Details__c githubDetails = new Github_Details__c();
                 githubDetails.Committer_Name__c = ps!=null? ps.name:'';
